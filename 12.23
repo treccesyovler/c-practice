@@ -1,0 +1,55 @@
+p3 交换学生
+思路：如果两组学生能够交换 那么它们在按从小到大排序后应该会得到一个相同的序列
+n = int(input())
+while n != 0:
+    A, B, count, i, p = [], [], 0, 0, []
+    while i < n:
+        A.append("0")
+        B.append("0")
+        i += 1
+    for j in range(n):
+        A[j], B[j] = input().split()
+        A[j], B[j] = int(A[j]), int(B[j])
+
+    A.sort()
+    B.sort()
+
+    if A == B:
+        print("YES")
+    else:
+        print("NO")
+
+    n = int(input())
+    
+    最初版本
+    n = int(input())
+while n != 0:
+    A, B, count, i, p = [], [], 0, 0, []
+    while i < n:
+        A.append("0")
+        B.append("0")
+        i += 1
+    for j in range(n):
+        A[j], B[j] = input().split()
+        A[j], B[j] = int(A[j]), int(B[j])
+
+    for k in range(n):
+
+        for j in range(k, n):
+            if A[k] == B[j] and B[k] == A[j] and k != j:
+                if k not in p and j not in p:
+                    count += 1
+                    p += [k] + [j]
+                    break
+            if A[k] == B[j] and B[k] == A[j] and k == j:
+                count += 2
+                p += [k]
+                break
+
+    if count == n / 2:
+        print("YES")
+    else:
+        print("NO")
+
+    n = int(input())
+    逐一判断会造成超时
