@@ -1,0 +1,144 @@
+#include <iostream>
+const int MAX = 100001;
+int n, m, p[MAX] = { 0 }, lst[MAX] = { 0 }, lst2[MAX] = { 0 };
+using namespace std;
+int main()
+{
+	
+	int k, x, y,count=0;
+	while (cin >> n >> m)
+	{
+		for (int u = 0; u < MAX; u++)
+		{
+			lst[u] = 0;
+		}
+		for (int i = 0; i < n; i++)
+		{
+			p[i] = i + 1;
+		}
+		for (int j = 1; j <= m; j++)
+		{
+			cin >> k;
+			if (k != 4)
+				cin >> x >> y;
+			if (k == 1)
+			{
+				for (int i = 0; i < n; i++)
+				{
+					for (int l = 0; l < n; l++)
+					{
+						if (p[i] == x && p[l] == y)
+						{
+							for (int t = 0; t < n + 1; t++)
+							{
+								if (t <= l)
+								{
+									lst[t] = p[t];
+								}
+								if (t > l)
+								{
+									lst[t + 1] = p[t];
+								}
+							}
+							lst[l + 1] = x;
+							for (int t = 0; t < n + 1; t++)
+							{
+								if (t > i)
+								{
+									lst[t-1] = lst[t];
+								}
+							}
+							break;
+						}
+					}
+					 
+				}
+			}
+			if (k == 2)
+			{
+				for (int i = 0; i < n; i++)
+				{
+					for (int l = 0; l < n; l++)
+					{
+						if (p[i] == x && p[l] == y)
+						{
+							for (int t = 0; t < n + 1; t++)
+							{
+								if (t <= l-2)
+								{
+									lst[t] = p[t];
+								}
+								if (t > l-2)
+								{
+									lst[t + 1] = p[t];
+								}
+							}
+							lst[l - 1] = x;
+							for (int t = 0; t < n + 1; t++)
+							{
+								if (t > i)
+								{
+									lst[t - 1] = lst[t];
+								}
+							}
+							break;
+						}
+					}
+
+				}
+
+			}
+			if (k == 3)
+			{
+
+				for (int i = 0; i < n; i++)
+				{
+					for (int l = 0; l < n; l++)
+					{
+						if (p[i] == x && p[l] == y)
+						{
+							int temp = p[i];
+							p[i] = p[l];
+							p[l] = temp;
+							break;
+						}
+					}
+					if (p[i] == x)
+					{
+						break;
+					}
+				}
+			}
+			if (k == 4)
+			{
+				for (int i = 0, l = n - 1; l> i; l--, i++)
+				{
+					int temp = p[i];
+					p[i] = p[l];
+					p[l] = temp;
+				}
+
+			}
+		}
+		
+		int total = 0;
+		for (int i = 0; i < n; i++)
+		{
+			if (i % 2 == 1)
+				total += p[i];
+		}
+		lst2[count] = total;
+		count++;
+		
+	}
+	for (int h = 1; h <= count; h++)
+	{
+		printf("Case %d: %d\n", h, lst2[h]);
+	}
+	
+	
+	return 0;
+
+
+
+}
