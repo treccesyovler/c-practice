@@ -230,3 +230,112 @@ void newnumber(int n)
 
 
 }
+
+
+2.#include <iostream>
+#include<cstring>
+#include<string>
+#include<cctype>
+using namespace std;
+const int MAX = 1000000;
+string s4[MAX] = { " " };
+string s6[MAX] = { " " };
+string s8[MAX] = { " " };
+int s2[26] = {};
+int main()
+{ 
+	string s1("abcdefghijklmnopqrstuvwxyz");
+	string s5("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+	int count = 0, count2 = 0,count3=0;
+	 
+	string s3;
+	string s3_copy;
+	string s7;
+	getline(cin, s3_copy);
+	
+	while (s3_copy != "#")
+	{
+		count3 = 0;
+		for (int j = 0; j < s3.size(); j++)
+		{
+			if (s3[j] != ' ')
+			{
+				s7 += s3[j];
+			}
+			else
+			{
+				s8[count3] = s7;
+				s7 = " ";
+				count3++;
+			}
+
+		}
+		s7 = " ";
+		count3 = 0;
+	for (auto i : s3_copy)
+	{
+		s3 += i;
+	}
+	for (int j = 0; j < 26; j++)
+		s2[j] = 0;
+	for (auto& i : s3)
+	{
+		i = tolower(i);
+	}
+	count3 = 0;
+	for (int j = 0; j < s3.size(); j++)
+	{
+		if (s3[j] != ' ')
+		{
+			s7 += s3[j];
+		}
+		else
+		{
+			s6[count3] = s7;
+			s7 = " ";
+			count3++;
+		}
+
+	}
+	for (int i = 0; i < end(s6)-begin(s6); i++)
+	{
+		count2 = 0;
+		for (int j = 0; j < end(s6) - begin(s6) && j != i; j++)
+		{
+		
+			if (s6[i] != s6[j])
+			{
+				count2++;
+			}
+			else break;
+		}
+		if (count2 == end(s6) - begin(s6) - 1)
+		{
+			s4[count] = s8[i];
+			count++;
+		}
+
+	}
+	for (int i = 0; i < end(s6) - begin(s6); i++)
+	{
+		s6[i] = " ";
+	}
+	getline(cin, s3_copy);
+	}
+	for (int j = 0; j < 26; j++)
+	{
+		for (int k = 0; k < count; k++)
+		{
+			if (s4[k][0] == s5[j])
+				cout << s4[k]<<endl;
+		}
+	}
+	for (int j = 0; j < 26; j++)
+	{
+		for (int k = 0; k < end(s4) - begin(s4); k++)
+		{
+			if (s4[k][0] == s1[j])
+				cout << s4[k]<<endl;
+		}
+	}
+}
