@@ -1,0 +1,95 @@
+#include <iostream>
+#include<cstring>
+#include<string>
+#include<cctype>
+using namespace std;
+const int MAX = 100;
+string str[MAX] = {};
+string str2[MAX] = {};
+string str3[MAX] = {};
+int counting[MAX] = {};
+int main()
+{
+	string s1("abcdefghijklmnopqrstuvwxyz");
+	string s2("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+	string s;
+	int count = 0, count_2 = 0, count_3 = 0, count_4 = 0;
+	while (cin >> s)
+	{
+		if (s[0] == '#')
+			break;
+		else
+		{
+			str[count] = s;
+			str2[count] = s;
+			count++;
+		}
+	}
+
+	for (int i = 0; i < count; i++)
+	{
+		for (auto& j : str[i])
+		{
+			j = tolower(j);
+		}
+	}
+	for (int k = 0; k < count; k++)
+	{
+		count_2 = 0;
+		for (int t = 0; t < count ; t++)
+		{
+			if (t == k && t == count - 1) break;
+			if (t == k)t++;
+			count_4 = 0;
+			for (int i = 0; i < str[k].size(); i++)
+			{
+				for (int j = 0; j < str[t].size(); j++)
+				{
+					if (str[k][i] == str[t][j] && counting[j]==0)
+					{
+						count_4++;
+						counting[j]++;
+						break;
+					}
+				}
+			}
+			for (int u = 0; u < 20; u++)
+			{
+				counting[u] = 0;
+			}
+			if (count_4 == str[k].size())
+			{
+				count_2++;
+				break;
+			}
+			}
+			 
+			 
+		
+
+		if (count_2 == 0)
+		{
+			str3[count_3] = str2[k];
+			count_3++;
+		}
+	}
+
+	for (int u = 0; u < 26; u++)
+	{
+		for (int p = 0; p < count_3; p++)
+		{
+			if (str3[p][0] == s2[u])
+				cout << str3[p] << endl;
+		}
+	}
+	for (int u = 0; u < 26; u++)
+	{
+		for (int p = 0; p < count_3; p++)
+		{
+			if (str3[p][0] == s1[u])
+				cout << str3[p] << endl;
+		}
+	}
+	return 0;
+
+}
