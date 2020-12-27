@@ -1,20 +1,18 @@
-1.
-#include <iostream>
+1.#include <iostream>
 #include<cstring>
 #include<string>
 #include<cctype>
 using namespace std;
-const int MAX = 100;
+const int MAX = 100000;
 string str[MAX] = {};
 string str2[MAX] = {};
 string str3[MAX] = {};
 int counting[MAX] = {};
 int main()
 {
-	string s1("abcdefghijklmnopqrstuvwxyz");
-	string s2("ABCDEFGHIJKLMNOPQRSTUVWXYZ");
+	 
 	string s;
-	int count = 0, count_2 = 0, count_3 = 0, count_4 = 0;
+	int count = 0, count_2 = 0, count_3 = 0, count_4 = 0,count_5=0;
 	while (cin >> s)
 	{
 		if (s[0] == '#')
@@ -34,24 +32,26 @@ int main()
 			j = tolower(j);
 		}
 	}
-	
+
 	for (int k = 0; k < count; k++)
 	{
 		count_2 = 0;
-		for (int t = 0; t < count ; t++)
+		for (int t = 0; t < count; t++)
 		{
 			if (t == k && t == count - 1) break;
 			if (t == k)t++;
 			count_4 = 0;
-			for (int i = 0; i < str[k].size(); i++)
-			{
-				for (int j = 0; j < str[t].size(); j++)
+			if (str[t].size() == str[k].size()) {
+				for (int i = 0; i < str[t].size(); i++)
 				{
-					if (str[k][i] == str[t][j] && counting[j]==0)
+					for (int j = 0; j < str[k].size(); j++)
 					{
-						count_4++;
-						counting[j]++;
-						break;
+						if (str[k][j] == str[t][i] && counting[j] == 0)
+						{
+							count_4++;
+							counting[j]++;
+							break;
+						}
 					}
 				}
 			}
@@ -59,15 +59,15 @@ int main()
 			{
 				counting[u] = 0;
 			}
-			if (count_4 == str[k].size())
+			if (count_4 == str[t].size())
 			{
 				count_2++;
 				break;
 			}
-			}
-			 
-			 
-		
+		}
+
+
+
 
 		if (count_2 == 0)
 		{
@@ -75,29 +75,25 @@ int main()
 			count_3++;
 		}
 	}
+	for (int j = 0; j < count_3-1; j++)
+	{ 
+		for (int y = 0; y < count_3-j-1; y++)
+		{
+				if (str3[y] > str3[y+1])
+				{
+					string temp = str3[y];
+					str3[y] = str3[y+1];
+					str3[y+1] = temp;
+				}
+			
+		}
+		 
+	}
+	for (int j = 0; j < count_3; j++)
+		cout << str3[j] << endl;
 
-	for (int u = 0; u < 26; u++)
-	{
-		for (int p = 0; p < count_3; p++)
-		{
-			if (str3[p][0] == s2[u])
-				cout << str3[p] << endl;
-		}
-	}
-	for (int u = 0; u < 26; u++)
-	{
-		for (int p = 0; p < count_3; p++)
-		{
-			if (str3[p][0] == s1[u])
-				cout << str3[p] << endl;
-		}
-	}
 	return 0;
-
 }
-
-
-
 
 
 2.
